@@ -1,33 +1,34 @@
 import {createSelector} from '@reduxjs/toolkit'
 import type {RootState} from '../../app/store'
 import {getGems} from '../gemsData/gemsData.selectors'
-import type {TgemLevel, TgemQuality} from './filters.types'
+import {
+  filterByGemColor,
+  filterByProperties,
+  sortByDescPrice,
+} from './filters.utils'
+import type {TGemColor} from './transfiguredGems'
 
 export const getFilter = (state: RootState) => state.filter
 
 export const getFilteredData = createSelector(
   [getGems, getFilter],
-  (gems, {gemIsCorrupted, gemLevel, gemQuality}) =>
-    gems.filter(
-      (g) =>
-        g.gemLevel === gemLevel &&
-        g.gemIsCorrupted === gemIsCorrupted &&
-        g.gemQuality === gemQuality
-    )
+  (gems, filter) => filterByProperties(gems, filter)
+)
+export const getLabGems = createSelector([getGems], (gems) =>
+  filterByProperties(gems, {gemLevel: 1, gemIsCorrupted: false, gemQuality: 0})
 )
 
-export const getFilteredByName = createSelector(
-  [getGems, (_: RootState, searchString: string) => searchString],
-  (gems, searchString) =>
-    gems.filter((g) => g.name.localeCompare(searchString) >= 0)
-)
+export const getSortedLabGems = createSelector([getLabGems], sortByDescPrice)
+
 export const getFilteredAndSortedData = createSelector(
   [getFilteredData],
-  (data) => data.sort((a, b) => b.price - a.price)
+  sortByDescPrice
 )
 
-export const allowedLevelValues = (isCorrupted: boolean): TgemLevel[] =>
-  isCorrupted ? [20, 21] : [1, 20]
+export const makeGetFilteredByName = (searchString: string) =>
+  createSelector([getGems], (gems) =>
+    searchString ? gems.filter((g) => g.name === searchString) : []
+  )
 
-export const allowedQualityValues = (isCorrupted: boolean): TgemQuality[] =>
-  isCorrupted ? [20, 23] : [0, 20]
+export const makeGetFilteredByColor = (color: TGemColor) =>
+  createSelector([getLabGems], (gems) => filterByGemColor(gems, color))

@@ -1,5 +1,5 @@
 import {memo, type JSX} from 'react'
-import NavMenuLink from './UI/NavMenuLink/NavMenuLink'
+import NavMenuLink from '../UI/NavMenuLink/NavMenuLink'
 
 function Footer(): JSX.Element {
   return (

@@ -25,22 +25,22 @@ const GemsList = () => {
   }
 
   return (
-    <div className='grid grid-cols-[220px_minmax(900px,_1fr)] '>
-      <div className='mt-50'>
-        <Filter
-          onChange={setSearchParams}
-          searchParams={searchParams.get('name')}
-        />
+    <>
+      <Filter
+        onChange={setSearchParams}
+        searchParams={searchQuery}
+      />
+      <div className=' grid max-w-8/10 m-auto'>
+        <div className=' grid md:grid-cols-3 gap-x-3 gap-y-1 '>
+          {result.map((item) => (
+            <GemListItem
+              key={item.id}
+              item={item}
+            />
+          ))}
+        </div>
       </div>
-      <div className=' grid grid-cols-3 gap-x-3 gap-y-1'>
-        {result.map((item) => (
-          <GemListItem
-            key={item.id}
-            item={item}
-          />
-        ))}
-      </div>
-    </div>
+    </>
   )
 }
 export default memo(GemsList)

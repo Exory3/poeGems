@@ -17,9 +17,7 @@ export const fetchGems = createAsyncThunk<IGemDetails[]>(
       throw new Error('Error fetching data from server')
     }
     const data = (await res.json()) as partialResponse[]
-    console.log(data)
     const filteredData = data.filter((gem) => gem.group === 'activegem')
-    console.log(filteredData)
     const result: IGemDetails[] = filteredData.map((item) => ({
       icon: item.icon,
       name: item.name,

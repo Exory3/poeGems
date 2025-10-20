@@ -29,7 +29,6 @@ const ErrorBoundry = () => {
       <div className=' text-3xl'>
         Sorry to hear that, you've reached an unreachable area
         <span className='text-[40px]'>&#128531;</span>
-        <hr />
         {time}
       </div>
     </div>

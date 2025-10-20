@@ -1,10 +1,10 @@
 import {memo} from 'react'
-import NavMenuLink from './UI/NavMenuLink/NavMenuLink'
+import NavMenuLink from '../UI/NavMenuLink/NavMenuLink'
 
 function Header() {
   return (
-    <header className=' flex justify-between gap-5 p-4 bg-blue-200 shadow-md rounded-md   '>
-      <nav>
+    <header>
+      <nav className='flex justify-between gap-5 p-4 bg-blue-200 shadow-md  rounded-md  '>
         <ul className='flex gap-2'>
           <li>
             <NavMenuLink to={'/'}>Home</NavMenuLink>
@@ -22,10 +22,10 @@ function Header() {
             <NavMenuLink to={'/about'}>About</NavMenuLink>
           </li>
         </ul>
+        <div>
+          <NavMenuLink to={'/login'}>Login</NavMenuLink>
+        </div>
       </nav>
-      <div>
-        <NavMenuLink to={'/login'}>Login</NavMenuLink>
-      </div>
     </header>
   )
 }

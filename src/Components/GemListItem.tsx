@@ -23,7 +23,7 @@ function GemListItem({
   return (
     <div
       onClick={() => {
-        const path = `gem/` + name.split(' ').join('_')
+        const path = `/gems/` + name.split(' ').join('-')
         navigate(path)
       }}
       key={id}

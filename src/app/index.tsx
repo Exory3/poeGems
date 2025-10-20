@@ -1,12 +1,14 @@
 import {Provider} from 'react-redux'
-import './App.css'
-import GemsList from './Pages/GemsList'
-import store from './app/store'
+
 import {createBrowserRouter, RouterProvider} from 'react-router'
-import Layout from './Components/Layout'
-import About from './Pages/About'
-import ErrorBoundry from './Pages/ErrorBoundry'
-import Home from './Pages/Home'
+import ErrorBoundry from '../Pages/ErrorBoundry'
+import Layout from '../Components/Layout/Layout'
+import About from '../Pages/About'
+import GemsList from '../Pages/GemsList'
+import store from './store'
+import Home from '../Pages/Home'
+import GemDetails from '../Pages/GemDetails'
+import Lab from '../Pages/Lab'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,8 @@ const router = createBrowserRouter([
       {index: true, element: <Home />},
       {path: 'about', element: <About />},
       {path: 'gems', element: <GemsList />},
+      {path: 'gems/:gemName', element: <GemDetails />},
+      {path: 'lab', element: <Lab />},
     ],
   },
 ])
