@@ -4,21 +4,16 @@ import {
   type PayloadAction,
 } from '@reduxjs/toolkit'
 import type {IApiGemDetails, IGemDetails, IGemsList} from './gemsData.types'
+import {getAllGems} from '../../utils/API'
 
-const baseUrl = `https://api.poe.watch/get?league=Mercenaries&category=gem`
+type PartialResponse = IApiGemDetails & Record<string, unknown>
 
-type partialResponse = IApiGemDetails & Record<string, unknown>
-
-export const fetchGems = createAsyncThunk<IGemDetails[]>(
+export const getFilteredGems = createAsyncThunk<IGemDetails[]>(
   'gemsData/fetch',
   async () => {
-    const res = await fetch(baseUrl)
-    if (!res.ok) {
-      throw new Error('Error fetching data from server')
-    }
-    const data = (await res.json()) as partialResponse[]
+    const data = (await getAllGems()) as PartialResponse[]
     const filteredData = data.filter((gem) => gem.group === 'activegem')
-    const result: IGemDetails[] = filteredData.map((item) => ({
+    return filteredData.map((item) => ({
       icon: item.icon,
       name: item.name,
       price: item.mean,
@@ -28,7 +23,6 @@ export const fetchGems = createAsyncThunk<IGemDetails[]>(
       gemLevel: item.gemLevel,
       gemQuality: item.gemQuality,
     }))
-    return result
   }
 )
 
@@ -46,17 +40,21 @@ const gemsDataSlice = createSlice({
     //   state.loading = action.payload
     // },
   },
+  selectors: {
+    getGems: (state) => state.gemsList,
+    getStatus: (state) => state.status,
+  },
   extraReducers: (builder) => {
-    builder.addCase(fetchGems.pending, (state) => {
+    builder.addCase(getFilteredGems.pending, (state) => {
       state.status = 'loading'
       state.error = null
     })
-    builder.addCase(fetchGems.rejected, (state, action) => {
+    builder.addCase(getFilteredGems.rejected, (state, action) => {
       state.status = 'failed'
       state.error = action.error.message ?? 'Unknown error'
     })
     builder.addCase(
-      fetchGems.fulfilled,
+      getFilteredGems.fulfilled,
       (state, action: PayloadAction<IGemDetails[]>) => {
         state.status = 'succeeded'
         state.gemsList = action.payload
@@ -66,3 +64,4 @@ const gemsDataSlice = createSlice({
 })
 
 export default gemsDataSlice
+export const {getGems, getStatus} = gemsDataSlice.selectors

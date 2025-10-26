@@ -9,12 +9,12 @@ import {
 import FilterSelect from './FilterSelect'
 import {formatLevel, formatQuality} from '../../utils/formatters'
 
-type TSearchParams = {
-  name: string
-}
+// type TSearchParams = {
+//   name: string
+// }
 
 interface IProps {
-  onChange: (obj: TSearchParams) => void
+  onChange: (obj: string) => void
   searchParams: string | null
 }
 
@@ -25,10 +25,15 @@ function Filter({onChange, searchParams}: IProps) {
   const qualityOptions = formatQuality(gemIsCorrupted)
   const levelOptions = formatLevel(gemIsCorrupted)
   return (
-    <div className='bg-blue-200 flex rounded-2xl justify-around items-center my-2 sticky z-10 top-0 max-w-3/4 mx-auto'>
+    <div className='bg-blue-200 flex rounded-md justify-around items-center my-2 sticky z-10 top-0 max-w-3/4 mx-auto'>
       <div className='text-black flex mx-4'>
-        Corruption:
+        <label
+          htmlFor='corruption'
+          className='hover:cursor-pointer'>
+          Corruption
+        </label>
         <Switch
+          id='corruption'
           size='small'
           color='warning'
           checked={gemIsCorrupted}
@@ -56,7 +61,7 @@ function Filter({onChange, searchParams}: IProps) {
         variant='standard'
         value={searchParams}
         onChange={(e) => {
-          onChange({name: e.target.value})
+          onChange(e.target.value)
         }}
       />
     </div>

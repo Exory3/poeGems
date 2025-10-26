@@ -1,7 +1,7 @@
 import {memo} from 'react'
 import NavMenuLink from '../UI/NavMenuLink/NavMenuLink'
 
-function Header() {
+const Header = memo(function Header() {
   return (
     <header>
       <nav className='flex justify-between gap-5 p-4 bg-blue-200 shadow-md  rounded-md  '>
@@ -13,14 +13,14 @@ function Header() {
             <NavMenuLink to={'/lab'}>Lab helper</NavMenuLink>
           </li>
           <li>
-            <NavMenuLink to={'/corrupt'}>Corruption</NavMenuLink>
+            <NavMenuLink to={'/corr'}>Corruption</NavMenuLink>
           </li>
           <li>
             <NavMenuLink to={'/gems'}>All gems</NavMenuLink>
           </li>
-          <li>
+          {/* <li>
             <NavMenuLink to={'/about'}>About</NavMenuLink>
-          </li>
+          </li> */}
         </ul>
         <div>
           <NavMenuLink to={'/login'}>Login</NavMenuLink>
@@ -28,6 +28,6 @@ function Header() {
       </nav>
     </header>
   )
-}
+})
 
-export default memo(Header)
+export default Header

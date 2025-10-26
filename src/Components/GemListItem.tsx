@@ -1,7 +1,7 @@
 import {memo} from 'react'
 import type {IGemDetails} from '../features/gemsData/gemsData.types'
 import Tag from './UI/Tag/Tag'
-import priceConvertion from '../utils/price/priceConvertion'
+import priceConvertion from '../utils/priceConvertion'
 import {useNavigate} from 'react-router'
 
 type GemsListProps = {item: IGemDetails}
@@ -28,7 +28,7 @@ function GemListItem({
       }}
       key={id}
       className={
-        'px-2 pt-2 pb-0.5 m-1 rounded-sm h-fit min-h-20 bg-blue-300 flex justify-between hover:bg-blue-400 cursor-pointer '
+        'px-2 pt-2 pb-0.5 m-1 rounded-sm h-fit min-h-20 bg-blue-300 flex justify-between cursor-pointer overflow-hidden transition delay-75 ease-in-out hover:bg-blue-400 hover:scale-102'
       }>
       <div>
         <div className='flex '>

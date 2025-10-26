@@ -5,7 +5,7 @@ function NavMenuLink({children, ...props}: NavLinkProps) {
     <NavLink
       className={({isActive}) =>
         isActive
-          ? 'text-gray-900 font-semibold p-2 border-b-emerald-400 border-b-2'
+          ? 'text-gray-900  p-2 border-b-emerald-400 border-b-2'
           : ' text-gray-600  hover:border-b-2 hover:border-b-emerald-400 p-2'
       }
       {...props}>

@@ -11,7 +11,7 @@ type TGemColorListProps = {
   title: string
 }
 
-function GemColorList({gems, title}: TGemColorListProps) {
+function GemColorList({gems, title, color}: TGemColorListProps) {
   const prices = useMemo(() => gems.map((gem) => gem.price), [gems])
   const probabilities = useMemo(() => labProbablities(prices), [prices])
   const topContributors = useMemo(
@@ -27,22 +27,37 @@ function GemColorList({gems, title}: TGemColorListProps) {
     [probabilities]
   )
   if (gems.length === 0) return null
-
+  const cn =
+    color === 'blue'
+      ? 'text-blue-500'
+      : color === 'green'
+      ? 'text-green-500'
+      : 'text-red-500'
   return (
     <div>
-      <h2 className='text-xl text-center font-semibold'>{title}</h2>
+      <h2 className={`text-xl text-center font-semibold ` + cn}>{title}</h2>
       <p className='text-center text-md mb-3'>
-        Expceted ev = {evValue.toFixed(2)}
+        Expected value = {evValue.toFixed(2)}
       </p>
-      <ul>
-        {topContributors.map(({price, contribution, prob}) => (
-          <li
-            className='text-center'
-            key={price}>
-            {price}c - {(prob * 100).toFixed(1)}% ({contribution.toFixed(2)} EV)
-          </li>
-        ))}
-      </ul>
+      <table className='table-fixed w-full border-collapse'>
+        <thead>
+          <tr>
+            <th className='text-left pl-4'>price</th>
+            <th>odds</th>
+            <th className='text-right pr-2'>contribution</th>
+          </tr>
+        </thead>
+        <tbody>
+          {topContributors.map(({price, contribution, prob}) => (
+            <tr key={price}>
+              <th className='text-left pl-4'>{price}c</th>
+              <th>{(prob * 100).toFixed(1)}%</th>
+              <th className='text-right pr-2'>{contribution.toFixed(2)}</th>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <ul></ul>
       {gems.map((gem) => (
         <GemListItem
           item={gem}

@@ -3,7 +3,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  type SelectChangeEvent,
   type SelectProps,
 } from '@mui/material'
 
@@ -12,10 +11,9 @@ export type Option<T> = {
   value: T
 }
 
-type FilterSelectProps<T> = Omit<SelectProps<T>, 'onChange' | 'value'> & {
+type FilterSelectProps<T> = Omit<SelectProps<T>, 'onChange'> & {
   label: string
   options: Option<T>[]
-  value: T
   onChange: (value: T) => void
 }
 
@@ -36,7 +34,7 @@ function FilterSelect<T extends string | number>({
         sx={{m: 1, minWidth: 120}}
         value={value}
         label={label}
-        onChange={(e: SelectChangeEvent<T>) => onChange(e.target.value as T)}
+        onChange={(e) => onChange(e.target.value as T)}
         {...rest}>
         {options.map((opt) => (
           <MenuItem

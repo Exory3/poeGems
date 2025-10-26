@@ -1,14 +1,13 @@
-import {Provider} from 'react-redux'
-
 import {createBrowserRouter, RouterProvider} from 'react-router'
 import ErrorBoundry from '../Pages/ErrorBoundry'
 import Layout from '../Components/Layout/Layout'
 import About from '../Pages/About'
-import GemsList from '../Pages/GemsList'
-import store from './store'
+import GemsList from '../Pages/AllGems'
 import Home from '../Pages/Home'
 import GemDetails from '../Pages/GemDetails'
 import Lab from '../Pages/Lab'
+import {useInitApp} from './hooks/useInitApp'
+import Corruption from '../Pages/Corruption'
 
 const router = createBrowserRouter([
   {
@@ -17,21 +16,22 @@ const router = createBrowserRouter([
     element: <Layout />,
     ErrorBoundary: ErrorBoundry,
     children: [
+      // {element: <ProtectedRoute />,
+      // children:
       {index: true, element: <Home />},
-      {path: 'about', element: <About />},
+      // {path: 'about', element: <About />},
       {path: 'gems', element: <GemsList />},
       {path: 'gems/:gemName', element: <GemDetails />},
       {path: 'lab', element: <Lab />},
+      {path: 'corr', element: <Corruption />},
     ],
   },
 ])
 
 function App() {
-  return (
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  )
+  useInitApp()
+
+  return <RouterProvider router={router} />
 }
 
 export default App
