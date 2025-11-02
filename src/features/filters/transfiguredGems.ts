@@ -1,4 +1,4 @@
-export const transfiguredGems: Record<TGemColor, string[]> = {
+export const TRANSGEMS: Record<TGemColor, string[]> = {
   red: [
     'Absolution of Inspiring',
     'Animate Guardian of Smiting',

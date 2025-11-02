@@ -1,6 +1,6 @@
 import type {IGemDetails} from '../gemsData/gemsData.types'
 import type {IInitialState} from './filters.types'
-import {transfiguredGems, type TGemColor} from './transfiguredGems'
+import {TRANSGEMS, type TGemColor} from './transfiguredGems'
 
 export const filterByProperties = (
   gems: IGemDetails[],
@@ -19,6 +19,6 @@ export const sortByDescPrice = (gems: IGemDetails[]) => {
 }
 
 export const filterByGemColor = (gems: IGemDetails[], color: TGemColor) => {
-  const gemColorArray = transfiguredGems[color]
-  return gems.filter((gem) => gemColorArray.includes(gem.name))
+  const gemsColorArray = TRANSGEMS[color]
+  return gems.filter((gem) => gemsColorArray.includes(gem.name))
 }

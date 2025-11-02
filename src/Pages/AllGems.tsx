@@ -1,10 +1,11 @@
 import {memo} from 'react'
-import GemListItem from '../Components/GemListItem'
+import GemListItem from '../Components/UI/GemListItem/GemListItem'
 import {useAppSelector} from '../app/hooks/storeHooks'
 import Filter from '../Components/FilterGems/Filter'
 import {getFilteredAndSortedData} from '../features/filters/filters.selectors'
 import {useSearchParams} from 'react-router'
 import {getStatus} from '../features/gemsData/gemsDataSlice'
+import Spinner from '../Components/UI/Spinner/Spinner'
 
 const AllGemsrGems = () => {
   const gemsList = useAppSelector(getFilteredAndSortedData)
@@ -25,15 +26,9 @@ const AllGemsrGems = () => {
     gem.name.toLowerCase().includes(searchQuery)
   )
 
-  if (!gemsList) {
-    return
-  }
-  if (status === 'loading') {
-    return <p>Loading gems...</p>
-  }
-
   return (
     <>
+      {status === 'idle' || (status === 'loading' && <Spinner />)}
       <Filter
         onChange={handleSearchString}
         searchParams={searchQuery}

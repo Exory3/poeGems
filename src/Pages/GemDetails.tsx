@@ -2,7 +2,7 @@ import {memo} from 'react'
 import {useParams} from 'react-router'
 import {makeGetFilteredByName} from '../features/filters/filters.selectors'
 import {useAppSelector} from '../app/hooks/storeHooks'
-import GemListItem from '../Components/GemListItem'
+import GemListItem from '../Components/UI/GemListItem/GemListItem'
 
 const GemsList = () => {
   const {gemName} = useParams<{gemName: string}>()

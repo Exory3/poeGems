@@ -1,8 +1,10 @@
 import type {TAuthRole} from '../features/auth/authSlice.types'
+import type {IApiGemDetails} from '../features/gemsData/gemsData.types'
 import {isAuthRole} from './typeGuard'
-const baseUrl = `https://api.poe.watch/get?league=Mercenaries&category=gem`
+// const baseUrl = `https://api.poe.watch/get?league=Mercenaries&category=gem`
+const baseUrl = `https://api.poe.watch/get?league=Keepers&category=gem`
 
-export const getAllGems = async () => {
+export const getAllGems = async (): Promise<IApiGemDetails[]> => {
   const res = await fetch(baseUrl)
   if (!res.ok) {
     throw new Error('Failed fetching gem list from server')

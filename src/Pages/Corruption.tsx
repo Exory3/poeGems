@@ -1,18 +1,23 @@
 import {useAppSelector} from '../app/hooks/storeHooks'
-import GemListItem from '../Components/GemListItem'
+import GemListItem from '../Components/UI/GemListItem/GemListItem'
 import {getGroupedWithEV} from '../features/filters/filters.selectors'
 import Divine from 'assets/images/Divine.png'
+import {getError, getStatus} from '../features/gemsData/gemsDataSlice'
+import ErrorComponent from '../Components/UI/Error/ErrorComponent'
+import Spinner from '../Components/UI/Spinner/Spinner'
 
 function Corruption() {
   const corruptionList = useAppSelector(getGroupedWithEV)
-
-  if (!corruptionList)
-    return <p>Something wrong, please refresh page or contact our support </p>
+  const status = useAppSelector(getStatus)
+  const error = useAppSelector(getError)
 
   const sortedCorruptionList = corruptionList.sort((a, b) => b.ev - a.ev)
 
   return (
     <div className='max-w-8/10 m-auto'>
+      {status === 'failed' && <ErrorComponent message={error} />}
+      {status === 'idle' ||
+        (status === 'loading' && <Spinner body='Corruping your page' />)}
       {sortedCorruptionList.map((i) => (
         <>
           <p className='ml-2 flex'>

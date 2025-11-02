@@ -43,6 +43,7 @@ const gemsDataSlice = createSlice({
   selectors: {
     getGems: (state) => state.gemsList,
     getStatus: (state) => state.status,
+    getError: (state) => state.error,
   },
   extraReducers: (builder) => {
     builder.addCase(getFilteredGems.pending, (state) => {
@@ -51,7 +52,8 @@ const gemsDataSlice = createSlice({
     })
     builder.addCase(getFilteredGems.rejected, (state, action) => {
       state.status = 'failed'
-      state.error = action.error.message ?? 'Unknown error'
+      console.log(action)
+      state.error = action.error.message ?? ''
     })
     builder.addCase(
       getFilteredGems.fulfilled,
@@ -64,4 +66,4 @@ const gemsDataSlice = createSlice({
 })
 
 export default gemsDataSlice
-export const {getGems, getStatus} = gemsDataSlice.selectors
+export const {getGems, getStatus, getError} = gemsDataSlice.selectors
