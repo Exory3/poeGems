@@ -12,7 +12,7 @@ export const getFilteredGems = createAsyncThunk<IGemDetails[]>(
   'gemsData/fetch',
   async () => {
     const data = (await getAllGems()) as PartialResponse[]
-    const filteredData = data.filter((gem) => gem.group === 'activegem')
+    const filteredData = data.filter((gem) => gem.group === 'support')
     return filteredData.map((item) => ({
       icon: item.icon,
       name: item.name,

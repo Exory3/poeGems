@@ -7,7 +7,7 @@ import GemColorList from '../Components/UI/GemColorList/GemColorList'
 import {getStatus} from '../features/gemsData/gemsDataSlice'
 import ErrorComponent from '../Components/UI/Error/ErrorComponent'
 import Spinner from '../Components/UI/Spinner/Spinner'
-import {labPageHeader, labPageInfo, labPageMain} from './Lab.styles'
+import {labPageHeader, labPageInfo, labPageBody} from './Lab.styles'
 
 const GemsList = () => {
   // const [isLoading, setIsLoading] = useState(false)
@@ -31,7 +31,7 @@ const GemsList = () => {
   const red = sortByDescPrice(useAppSelector(makeGetFilteredByColor('red')))
   const green = sortByDescPrice(useAppSelector(makeGetFilteredByColor('green')))
   const blue = sortByDescPrice(useAppSelector(makeGetFilteredByColor('blue')))
-
+  const content = red.length > 0 || green.length > 0 || blue.length > 0
   return (
     <>
       <div>
@@ -55,8 +55,8 @@ const GemsList = () => {
         />
       )}
       {(status === 'idle' || status === 'loading') && <Spinner />}
-      {status === 'succeeded' && (
-        <div className={labPageMain()}>
+      {content && (
+        <div className={labPageBody()}>
           <GemColorList
             key={'red'}
             color='red'
@@ -76,6 +76,9 @@ const GemsList = () => {
             title='Intelligence Gems'
           />
         </div>
+      )}
+      {!content && (
+        <ErrorComponent message={'failed to fetch gem list from server'} />
       )}
     </>
   )

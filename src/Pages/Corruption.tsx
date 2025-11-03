@@ -5,6 +5,12 @@ import Divine from 'assets/images/Divine.png'
 import {getError, getStatus} from '../features/gemsData/gemsDataSlice'
 import ErrorComponent from '../Components/UI/Error/ErrorComponent'
 import Spinner from '../Components/UI/Spinner/Spinner'
+import {
+  corruptionPageHeader,
+  corruptionPageItem,
+  corruptionPagePrice,
+  corruptionPagePriceIcon,
+} from './Corruption.styles'
 
 function Corruption() {
   const corruptionList = useAppSelector(getGroupedWithEV)
@@ -14,20 +20,20 @@ function Corruption() {
   const sortedCorruptionList = corruptionList.sort((a, b) => b.ev - a.ev)
 
   return (
-    <div className='max-w-8/10 m-auto'>
+    <div className={corruptionPageHeader()}>
       {status === 'failed' && <ErrorComponent message={error} />}
       {status === 'idle' ||
         (status === 'loading' && <Spinner body='Corruping your page' />)}
       {sortedCorruptionList.map((i) => (
-        <>
-          <p className='ml-2 flex'>
+        <div key={i.name}>
+          <p className={corruptionPagePrice()}>
             {i.ev?.toFixed(1)}:
             <img
-              className='h-6 w-6'
+              className={corruptionPagePriceIcon()}
               src={Divine}
             />
           </p>
-          <div className='grid grid-cols-4 gap-x-2'>
+          <div className={corruptionPageItem()}>
             {Object.entries(i.versions).map(([, value]) => (
               <GemListItem
                 item={value}
@@ -35,7 +41,7 @@ function Corruption() {
               />
             ))}
           </div>
-        </>
+        </div>
       ))}
     </div>
   )

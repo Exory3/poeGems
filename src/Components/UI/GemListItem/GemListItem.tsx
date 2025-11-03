@@ -1,4 +1,3 @@
-import {memo} from 'react'
 import type {IGemDetails} from '../../../features/gemsData/gemsData.types'
 import Tag from '../Tag/Tag'
 import priceConvertion from '../../../utils/priceConvertion'
@@ -9,7 +8,7 @@ import {
   itemContainer,
   nameStyle,
   priceStyle,
-} from './GemListItem.style'
+} from './GemListItem.styles'
 
 type GemsListProps = {item: IGemDetails}
 
@@ -51,4 +50,4 @@ function GemListItem({
   )
 }
 
-export default memo(GemListItem)
+export default GemListItem

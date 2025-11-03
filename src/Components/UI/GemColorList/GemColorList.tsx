@@ -4,7 +4,7 @@ import type {IGemDetails} from '../../../features/gemsData/gemsData.types'
 import {labProbablities} from '../../../utils/labProbablities'
 import GemListItem from '../GemListItem/GemListItem'
 import {topEvContributors} from '../../../utils/topEvContributors'
-import {evStyle, titleStyle} from './gemColorList.style'
+import {evStyle, titleStyle} from './gemColorList.styles'
 import GemsTable from './gemsTable/GemsTable'
 
 type TGemColorListProps = {

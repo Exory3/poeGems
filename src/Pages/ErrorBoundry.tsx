@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router'
+import {errorBoundryBody, errorBoundryContainer} from './ErrorBoundry.styles'
 
 const ErrorBoundry = () => {
   const navigate = useNavigate()
@@ -25,10 +26,10 @@ const ErrorBoundry = () => {
   }, [navigate])
 
   return (
-    <div className='flex justify-center align-middle mt-52'>
-      <div className=' text-3xl'>
+    <div className={errorBoundryContainer()}>
+      <div className={errorBoundryBody()}>
         Sorry to hear that, you've reached an unreachable area
-        <span className='text-[40px]'>&#128531;</span>
+        <span>&#128531;</span>
         {time}
       </div>
     </div>

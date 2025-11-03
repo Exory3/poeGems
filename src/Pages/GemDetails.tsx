@@ -1,30 +1,33 @@
-import {memo} from 'react'
 import {useParams} from 'react-router'
 import {makeGetFilteredByName} from '../features/filters/filters.selectors'
 import {useAppSelector} from '../app/hooks/storeHooks'
 import GemListItem from '../Components/UI/GemListItem/GemListItem'
+import {
+  gemDetailsBody,
+  gemDetailsContainer,
+  gemDetailsInfo,
+} from './GemDetails.styles'
 
-const GemsList = () => {
+const GemDetails = () => {
   const {gemName} = useParams<{gemName: string}>()
   const searchString = gemName?.split('-').join(' ') ?? ''
   const itemsList = useAppSelector(makeGetFilteredByName(searchString))
-
-  if (itemsList.length === 0 || !itemsList) {
-    return (
-      <>
-        <p className='text-3xl text-center my-10'>
-          Seems like something went wrong, empty array found.
-        </p>
-        <p className='text-3xl text-center'>
-          Please, consider checking gem name again
-        </p>
-      </>
-    )
-  }
+  console.log('hey')
   return (
     <>
-      <div className=' grid w-7/10 m-auto mt-10'>
-        <div className=' grid md:grid-cols-3 gap-x-3 gap-y-1 '>
+      {itemsList.length === 0 ||
+        (!itemsList && (
+          <>
+            <p className={gemDetailsInfo()}>
+              Seems like something went wrong, empty array found.
+            </p>
+            <p className={gemDetailsInfo()}>
+              Please, consider checking gem name again
+            </p>
+          </>
+        ))}
+      <div className={gemDetailsContainer()}>
+        <div className={gemDetailsBody()}>
           {itemsList.map((item) => (
             <GemListItem
               key={item.id}
@@ -36,4 +39,4 @@ const GemsList = () => {
     </>
   )
 }
-export default memo(GemsList)
+export default GemDetails

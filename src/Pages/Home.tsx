@@ -5,15 +5,13 @@ function Home() {
       <p className=' text-xl border-b-2 border-b-emerald-700 pb-4 '>
         to learning project of React. Here you can get info on:
       </p>
-      <ul className='my-4 text-left text-lg'>
-        <li className='mb-4'>-General gem pricing with filtering </li>
-        <li className='mb-4'>
+      <ul className='my-4 text-left text-lg flex flex-col gap-4'>
+        <li>-General gem pricing with filtering </li>
+        <li>
           -Expected value of putting different collor gems in Lab Font for
           maximum profit
         </li>
-        <li className='mb-4'>
-          -Expected value of corrupting gem and math info on it
-        </li>
+        <li>-Expected value of corrupting gem and math info on it</li>
       </ul>
     </div>
   )

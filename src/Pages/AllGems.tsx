@@ -1,4 +1,3 @@
-import {memo} from 'react'
 import GemListItem from '../Components/UI/GemListItem/GemListItem'
 import {useAppSelector} from '../app/hooks/storeHooks'
 import Filter from '../Components/FilterGems/Filter'
@@ -6,6 +5,8 @@ import {getFilteredAndSortedData} from '../features/filters/filters.selectors'
 import {useSearchParams} from 'react-router'
 import {getStatus} from '../features/gemsData/gemsDataSlice'
 import Spinner from '../Components/UI/Spinner/Spinner'
+import ErrorComponent from '../Components/UI/Error/ErrorComponent'
+import {allGemsBody, allGemsContainer, allGemsInfo} from './AllGems.styles'
 
 const AllGemsrGems = () => {
   const gemsList = useAppSelector(getFilteredAndSortedData)
@@ -29,12 +30,17 @@ const AllGemsrGems = () => {
   return (
     <>
       {status === 'idle' || (status === 'loading' && <Spinner />)}
+      {status === 'failed' && <ErrorComponent message='Failed fetching gems' />}
       <Filter
         onChange={handleSearchString}
         searchParams={searchQuery}
       />
-      <div className=' grid max-w-8/10 m-auto'>
-        <div className=' grid md:grid-cols-3 gap-x-3 gap-y-1 '>
+      {!result ||
+        (result.length === 0 && (
+          <h2 className={allGemsInfo()}>No results found for your request </h2>
+        ))}
+      <div className={allGemsContainer()}>
+        <div className={allGemsBody()}>
           {result.slice(0, 99).map((item) => (
             <GemListItem
               key={item.id}
@@ -46,4 +52,4 @@ const AllGemsrGems = () => {
     </>
   )
 }
-export default memo(AllGemsrGems)
+export default AllGemsrGems

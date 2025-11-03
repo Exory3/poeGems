@@ -193,4 +193,4 @@ export const TRANSGEMS: Record<TGemColor, string[]> = {
 } as const
 
 export type TGemColor = 'red' | 'green' | 'blue'
-export type TGemName = (typeof transfiguredGems)[TGemColor][number]
+export type TGemName = (typeof TRANSGEMS)[TGemColor][number]

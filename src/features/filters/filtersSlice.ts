@@ -19,25 +19,8 @@ const filterSLice = createSlice({
     },
     setGemIsCorrupted(state, action: PayloadAction<boolean>) {
       state.gemIsCorrupted = action.payload
-
-      //removing impossible or useless gem combinations
-      if (!action.payload) {
-        if (state.gemLevel > 20) {
-          state.gemLevel = 20
-        }
-
-        if (state.gemQuality > 20) {
-          state.gemQuality = 20
-        }
-      } else {
-        if (state.gemLevel === 1) {
-          state.gemLevel = 20
-        }
-
-        if (state.gemQuality === 0) {
-          state.gemQuality = 20
-        }
-      }
+      state.gemLevel = 20
+      state.gemQuality = 20
     },
   },
 })

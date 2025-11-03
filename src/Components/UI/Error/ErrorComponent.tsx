@@ -1,4 +1,8 @@
-import {ErrorContainer, ErrorHeader, ErrorMessage} from './ErrorComponent.style'
+import {
+  ErrorContainer,
+  ErrorHeader,
+  ErrorMessage,
+} from './ErrorComponent.styles'
 
 type TErrorComponent = {
   title?: string
