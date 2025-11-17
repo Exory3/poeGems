@@ -7,7 +7,7 @@ import {
 } from './filters.utils'
 
 import type {TGemColor} from './transfiguredGems'
-import {getGems} from '../gemsData/gemsDataSlice'
+import {getGems} from '../gems/gemsDataSlice'
 
 export const getFilter = (state: RootState) => state.filter
 

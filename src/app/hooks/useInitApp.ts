@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {useAppDispatch, useAppSelector} from './storeHooks'
-import {getFilteredGems} from '../../features/gemsData/gemsDataSlice'
+import {getFilteredGems} from '../../features/gems/gemsDataSlice'
 
 export const useInitApp = () => {
   const dispatch = useAppDispatch()

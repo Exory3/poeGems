@@ -20,7 +20,8 @@
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "react-redux": "^9.2.0",
-    "react-router": "^7.9.4",
+    "react-router": "^7.9.6",
+    "react-router-dom": "^7.9.6",
     "tailwind-variants": "^3.1.1",
     "tailwindcss": "^4.1.14"
   },

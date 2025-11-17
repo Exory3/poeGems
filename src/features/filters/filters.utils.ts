@@ -1,4 +1,4 @@
-import type {IGemDetails} from '../gemsData/gemsData.types'
+import type {IGemDetails} from '../gems/gemsData.types'
 import type {IInitialState} from './filters.types'
 import {TRANSGEMS, type TGemColor} from './transfiguredGems'
 

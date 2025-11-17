@@ -1,9 +1,8 @@
 import {combineSlices, configureStore} from '@reduxjs/toolkit'
-import gemsDataSlice from '../features/gemsData/gemsDataSlice'
-import authSlice from '../features/auth/authSlice'
+import gemsDataSlice from '../features/gems/gemsDataSlice'
 import filterSLice from '../features/filters/filtersSlice'
 
-const rootReducer = combineSlices(gemsDataSlice, authSlice, filterSLice)
+const rootReducer = combineSlices(gemsDataSlice, filterSLice)
 
 const store = configureStore({
   reducer: rootReducer,
